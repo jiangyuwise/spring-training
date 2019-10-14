@@ -1,0 +1,10 @@
+jar {
+    manifest {
+        attributes(
+                "Created-By": "Jimmy",
+                "Specification-Title": "Pro Spring",
+                "Main-Class" : "com.codve.prospring.ch02.HelloWorldSpringDI",
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
+}
