@@ -1,0 +1,3 @@
+rootProject.name = 'ProSpring'
+include 'chapter02:hello-world'
+
