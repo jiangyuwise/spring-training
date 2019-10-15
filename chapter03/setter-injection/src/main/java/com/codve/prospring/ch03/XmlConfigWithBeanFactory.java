@@ -1,6 +1,5 @@
 package com.codve.prospring.ch03;
 
-import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.ClassPathResource;
@@ -11,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 public class XmlConfigWithBeanFactory {
     public static void main(String[] args) {
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        BeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         reader.loadBeanDefinitions(new ClassPathResource("/xml-config-with-bean-factory.xml"));
         Oracle oracle = factory.getBean("oracle", BookWormOracle.class);
         System.out.println(oracle.defineMeaningOfLife());
