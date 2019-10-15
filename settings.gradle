@@ -4,4 +4,5 @@ include 'chapter03:context-dependency-lookup'
 include 'chapter03:constructor-inject'
 include 'chapter03:injection'
 include 'chapter03:setter-injection'
-
+include 'chapter03:field-inject'
+include 'chapter03:simple-type'
