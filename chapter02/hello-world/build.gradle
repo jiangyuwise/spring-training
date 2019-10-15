@@ -3,7 +3,7 @@ jar {
         attributes(
                 "Created-By": "Jimmy",
                 "Specification-Title": "Pro Spring",
-                "Main-Class" : "com.codve.prospring.ch02.HelloWorldSpringDI",
+                "Main-Class" : "com.codve.prospring.ch02.xmlconfig.HelloWorldSpringDI",
                 "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
         )
     }
