@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 使用标准的 XML 注解 bean, 相应的配置文件为 /resources/xml/app.xml
+ * 典型的依赖拉取
  */
 public class HelloWorldSpringDI {
     public static void main(String[] args) {

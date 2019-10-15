@@ -1,3 +1,4 @@
 rootProject.name = 'ProSpring'
 include 'chapter02:hello-world'
+include 'chapter03:context-dependency-lookup'
 
