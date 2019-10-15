@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * 创建一个普通的 bean, name = "provider"
  * 需要配合 StandardMessageRender, DeclaredSpringComponents, annotated/app.xml 食用
- * @see com.codve.prospring.ch03.annotated.StandardMessageRender
+ * @see StandardMessageRender
  * @see com.codve.prospring.ch03.DeclaredSpringComponents
  */
 @Component("provider")
