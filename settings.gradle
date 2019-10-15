@@ -1,4 +1,7 @@
 rootProject.name = 'ProSpring'
 include 'chapter02:hello-world'
 include 'chapter03:context-dependency-lookup'
+include 'chapter03:constructor-inject'
+include 'chapter03:injection'
+include 'chapter03:setter-injection'
 
