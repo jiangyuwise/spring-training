@@ -4,7 +4,11 @@ public class Son {
 
     private Parent parent;
 
-    private String name = "little Tom";
+    private String name;
+
+    public Son(String name) {
+        this.name = name;
+    }
 
     public void setParent(Parent parent) {
         this.parent = parent;
@@ -15,6 +19,6 @@ public class Son {
     }
 
     public void info() {
-        System.out.println("name: " + name + ", parent: " + parent.getName());
+        System.out.println("name: " + this.getName() + ", parent: " + parent.getName());
     }
 }

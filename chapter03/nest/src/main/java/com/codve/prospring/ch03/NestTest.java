@@ -2,6 +2,9 @@ package com.codve.prospring.ch03;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+/**
+ * 嵌套 ApplicationContext
+ */
 public class NestTest {
     public static void main(String[] args) {
         GenericXmlApplicationContext parentContext = new GenericXmlApplicationContext();
