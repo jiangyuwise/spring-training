@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="com.codve.prospring.ch03.annotation"/>
+
+    <bean id="redApple" class="com.codve.prospring.ch03.xml.Apple" c:name="red apple"/>
+    <bean id="greenApple" class="com.codve.prospring.ch03.xml.Apple" c:name="green apple"/>
+
+    <util:map id="fruits" map-class="java.util.HashMap"
+              key-type="java.lang.String"
+              value-type="com.codve.prospring.ch03.xml.Apple">
+        <entry key="1" value-ref="redApple"/>
+        <entry key="2" value-ref="greenApple"/>
+    </util:map>
+
+    <util:list id="names" list-class="java.util.ArrayList"
+        value-type="java.lang.String">
+        <value>Anna</value>
+        <value>Frank</value>
+    </util:list>
+</beans>

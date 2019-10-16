@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 创建 2 个 bean -->
+    <bean id="redApple" class="com.codve.prospring.ch03.xml.Apple" c:name="red apple"/>
+    <bean id="greenApple" class="com.codve.prospring.ch03.xml.Apple" c:name="green apple"/>
+
+    <bean id="collectionInject" class="com.codve.prospring.ch03.xml.CollectionInject">
+        <property name="map">
+            <map>
+                <entry key="apple" value="$2.99"/>
+                <entry key="banana" value="$1.99"/>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="worker">1024</prop>
+                <prop key="ram">2048</prop>
+            </props>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>Beijing</value>
+                <value>Shanghai</value>
+            </set>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>USA</value>
+                <value>CN</value>
+            </list>
+        </property>
+
+        <!--设置引用类型的集合-->
+        <property name="fruits">
+            <map>
+                <entry key="1" value-ref="redApple"/>
+                <entry key="2" value-ref="greenApple"/>
+            </map>
+        </property>
+
+    </bean>
+</beans>
