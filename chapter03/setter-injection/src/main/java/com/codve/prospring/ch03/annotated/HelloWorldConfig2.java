@@ -10,5 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @see StandardMessageRender
  */
 @ComponentScan(basePackages = {"com.codve.prospring.ch03.annotated"})
+@Configuration
 public class HelloWorldConfig2 {
 }
