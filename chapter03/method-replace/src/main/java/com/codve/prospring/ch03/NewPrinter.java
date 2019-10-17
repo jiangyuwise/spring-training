@@ -14,7 +14,7 @@ public class NewPrinter implements MethodReplacer {
      * @param obj 要替换的 bean
      * @param method 要替换的方法
      * @param args 方法参数
-     * @return 替换后的方法返回的参数
+     * @return 替换后方法的返回值
      * @throws Throwable 无法替换时抛出异常
      */
     @Override
