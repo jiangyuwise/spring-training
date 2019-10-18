@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="md5Factory" class="com.codve.prospring.ch04.MessageDigestFactory" p:algName="md5"/>
+
+    <bean id="sha1Factory" class="com.codve.prospring.ch04.MessageDigestFactory" p:algName="sha1"/>
+
+    <bean id="md5" factory-bean="md5Factory" factory-method="getInstance"/>
+
+    <bean id="sha1" factory-bean="sha1Factory" factory-method="getInstance"/>
+
+    <bean id="digester" class="com.codve.prospring.ch04.MessageDigester">
+        <property name="mds">
+            <map>
+                <entry key="md5" value-ref="md5"/>
+                <entry key="sha1" value-ref="sha1"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
