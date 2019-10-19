@@ -4,6 +4,10 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
 
+/**
+ * 理解 AOP, 在 Person.work() 前后插入代码
+ * PersonDecorator implements MethodInterceptor extends Person
+ */
 public class PersonDecorator implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
