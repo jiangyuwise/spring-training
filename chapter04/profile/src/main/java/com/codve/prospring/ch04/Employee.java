@@ -1,8 +1,8 @@
 package com.codve.prospring.ch04;
 
 public class Employee implements Person {
-    String name;
-    String job;
+    private String  name;
+    private String job;
 
     public Employee(String name, String job) {
         this.name = name;

@@ -1,8 +1,8 @@
 package com.codve.prospring.ch04;
 
 public class Student implements Person {
-    String name;
-    String major;
+    private String name;
+    private String major;
 
     public Student(String name, String major) {
         this.name = name;

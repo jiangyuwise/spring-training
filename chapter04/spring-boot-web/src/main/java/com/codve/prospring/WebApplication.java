@@ -28,6 +28,5 @@ public class WebApplication {
             System.out.println(e.getMessage());
         }
         context.close();
-        context.close();
     }
 }

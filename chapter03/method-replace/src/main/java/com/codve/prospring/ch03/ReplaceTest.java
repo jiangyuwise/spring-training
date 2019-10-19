@@ -16,12 +16,12 @@ public class ReplaceTest {
 
         Printer printer = context.getBean("printer", Printer.class);
 
-        // 注意!!! newPrinter 取的是第3个 bean, 而不是 newPrinter
-        Printer newPrinter = context.getBean("replacer", Printer.class);
+        // 注意!!! replacer 取的是第3个 bean, 而不是 newPrinter
+        Printer replacer = context.getBean("replacer", Printer.class);
 
         String msg = "hello, world";
 
         System.out.println(printer.print(msg));
-        System.out.println(newPrinter.print(msg));
+        System.out.println(replacer.print(msg));
     }
 }

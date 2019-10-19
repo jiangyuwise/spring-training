@@ -10,12 +10,12 @@ import java.security.MessageDigest;
  */
 public class MessageDigestFactory implements FactoryBean<MessageDigest>, InitializingBean {
 
-    private String algorithmName = "md5";
+    private String algName = "md5";
 
     private MessageDigest messageDigest;
 
-    public void setAlgorithmName(String algorithmName) {
-        this.algorithmName = algorithmName;
+    public void setAlgName(String algName) {
+        this.algName = algName;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MessageDigestFactory implements FactoryBean<MessageDigest>, Initial
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        messageDigest = MessageDigest.getInstance(algorithmName);
+        messageDigest = MessageDigest.getInstance(algName);
     }
 
     public boolean isSingleton() {

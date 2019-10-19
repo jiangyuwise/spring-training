@@ -4,7 +4,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
  * 运行时, 传入不同的参数, 使用不同的配置文件
- * profile 配置文件中要假如 profile 属性
+ * profile 配置文件中要加入 profile 属性
  * 在 vm options 中输入 -Dspring.profiles.active="employee"
  */
 public class ProfileTest {

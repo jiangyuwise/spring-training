@@ -7,7 +7,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
  * 实现了 ApplicationContextAware 的 bean 可以获取到 context 的引用
- * 利用 context 可以完成 bean 销毁
+ * 利用 context.registerShutdownHook() 可以完成 bean 销毁
  * setApplicationContext 由 Spring 调用.
  * 另见 app.xml 和 Writer.java
  */

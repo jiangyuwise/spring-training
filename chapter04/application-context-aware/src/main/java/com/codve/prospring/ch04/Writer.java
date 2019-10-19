@@ -35,7 +35,7 @@ public class Writer {
     }
 
     /**
-     * 利用已经注册的钩子 ShutdownHock, 这里就不用再调用 context.registerShutdownHock() 了
+     * 注册了销毁钩子后, 可以通过钩子来销毁 bean, 就不再调用context.close() 了
      */
     public static void main(String[] args) {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext();

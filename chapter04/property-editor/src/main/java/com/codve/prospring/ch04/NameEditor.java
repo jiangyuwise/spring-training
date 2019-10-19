@@ -4,6 +4,7 @@ import java.beans.PropertyEditorSupport;
 
 /**
  * 自定义的属性编辑器
+ * @see Person
  */
 public class NameEditor extends PropertyEditorSupport {
     @Override

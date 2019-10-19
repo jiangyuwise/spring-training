@@ -7,6 +7,7 @@ ext {
     //logging libs
     slf4jVersion = '1.7.25'
     logbackVersion = '1.2.3'
+    aspectjVersion = '1.8.13'
 
     //testing libs
     junitVersion = '4.12'
@@ -23,8 +24,10 @@ ext {
     ]
 
     misc = [
-            slf4jJcl: "org.slf4j:jcl-over-slf4j:$slf4jVersion",
-            logback : "ch.qos.logback:logback-classic:$logbackVersion",
+            slf4jJcl     : "org.slf4j:jcl-over-slf4j:$slf4jVersion",
+            logback      : "ch.qos.logback:logback-classic:$logbackVersion",
+            aspectjweaver: "org.aspectj:aspectjweaver:$aspectjVersion",
+            aspectjrt    : "org.aspectj:aspectjrt:$aspectjVersion",
     ]
 
     testing = [

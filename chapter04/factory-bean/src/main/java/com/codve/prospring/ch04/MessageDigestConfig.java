@@ -9,37 +9,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 使用注解配置代替 app.xml
+ * 使用注解代替 XML 文件
  */
-public class MessageDigestConfigTest {
+@Configuration
+public class MessageDigestConfig {
+    @Bean
+    public MessageDigestFactory md5Factory() {
+        MessageDigestFactory md5Factory = new MessageDigestFactory();
+        md5Factory.setAlgName("md5");
+        return md5Factory;
+    }
 
-    @Configuration
-    static class MessageDigestConfig {
-        @Bean
-        public MessageDigestFactory md5Factory() {
-            MessageDigestFactory md5Factory = new MessageDigestFactory();
-            md5Factory.setAlgorithmName("md5");
-            return md5Factory;
-        }
+    @Bean
+    public MessageDigestFactory sha1Factory() {
+        MessageDigestFactory sha1Factory = new MessageDigestFactory();
+        sha1Factory.setAlgName("sha1");
+        return sha1Factory;
+    }
 
-        @Bean
-        public MessageDigestFactory sha1Factory() {
-            MessageDigestFactory sha1Factory = new MessageDigestFactory();
-            sha1Factory.setAlgorithmName("sha1");
-            return sha1Factory;
-        }
+    @Bean
+    MessageDigester digester() throws Exception {
+        MessageDigester digester = new MessageDigester();
 
-        @Bean
-        MessageDigester digester() throws Exception {
-            MessageDigester digester = new MessageDigester();
+        Map<String, MessageDigest> mds = new HashMap<>();
+        mds.put("md5", md5Factory().getObject());
+        mds.put("sha1", sha1Factory().getObject());
 
-            Map<String, MessageDigest> mds = new HashMap<>();
-            mds.put("md5", md5Factory().getObject());
-            mds.put("sha1", sha1Factory().getObject());
-
-            digester.setMds(mds);
-            return digester;
-        }
+        digester.setMds(mds);
+        return digester;
     }
 
     public static void main(String[] args) {

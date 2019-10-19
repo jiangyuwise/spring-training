@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 使用注解的方式实现 查找方法注入
- * 这里只能使用 @Component 注解, 且setAddress 必须使用@Autowired 和@Qualifier.
  */
 @Component("employee")
 public class Employee implements Person {

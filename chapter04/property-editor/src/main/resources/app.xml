@@ -8,7 +8,7 @@
     <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer"
           p:propertyEditorRegistrars-ref="propertyEditorRegistrarList"/>
 
-    <!-- 注册dateEditor -->
+    <!-- 注册CustomDateEditor -->
     <util:list id="propertyEditorRegistrarList">
         <bean class="com.codve.prospring.ch04.Group$DateEditorRegistrar"/>
     </util:list>

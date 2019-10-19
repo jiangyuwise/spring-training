@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * 如果所有的 bean 已经注解好了, 就可以用这种方式
  * 效果和 annotation/MethodInjectTest 是一样的.
  * @see com.codve.prospring.ch03.annotation.MethodInjectTest
- *
- * TODO 这里有个错误, 因为 address 依赖 xml 文件的 name, 需要纯 java 完成构造函数注入
  */
 public class MethodInjectTest {
     @Configuration
@@ -28,8 +26,13 @@ public class MethodInjectTest {
         Person employee = context.getBean("employee", Employee.class);
         Person abstractEmployee = context.getBean("abstractEmployee", AbstractEmployee.class);
 
-        System.out.println(employee.getAddress());
-        System.out.println(abstractEmployee.getAddress());
+        for (int i = 0; i < 5; i++) {
+            System.out.println(employee.getAddress());
+        }
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println(abstractEmployee.getAddress());
+        }
     }
 
 }

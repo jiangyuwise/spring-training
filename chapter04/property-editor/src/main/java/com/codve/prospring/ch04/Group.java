@@ -14,12 +14,13 @@ import java.util.List;
  * 使用内置的 propertyEditor
  * propertyEditor 用于将字符串转换为合适的对象, 如将字符串"2019-10-18" 转换为 new Date("2019-10-18")
  * 下面定义了一个群 group, 有2个属性
- * Date 表示创建时间, 使用spring 内置的的属性编辑器
- * names 表示成员名单, 使用 Spring 内置的属性编辑器
+ * Date 表示创建时间, 使用spring 内置的的属性编辑器 CustomDateEditor
+ * names 表示成员名单, 使用 Spring 内置的属性编辑器 CustomCollectionEditor
+ * 注册见 app.xml
  */
 public class Group {
-    private Date date; // 使用内置的 CustomDateEditor
-    private List<String> names; // 使用内置的 CustomCollectionEditor
+    private Date date;
+    private List<String> names;
 
     public Date getDate() {
         return date;
@@ -37,11 +38,11 @@ public class Group {
         this.names = names;
     }
 
-    // dateEditor 需要注册
+    // CustomDateEditor 注册器
     public static class DateEditorRegistrar implements PropertyEditorRegistrar {
         @Override
         public void registerCustomEditors(PropertyEditorRegistry registry) {
-            SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             registry.registerCustomEditor(Date.class,
                     new CustomDateEditor(format, true));
             registry.registerCustomEditor(String.class, new StringTrimmerEditor(true));
