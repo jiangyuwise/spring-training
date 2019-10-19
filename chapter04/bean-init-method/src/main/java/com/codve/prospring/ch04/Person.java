@@ -5,9 +5,9 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
- * 在 XML 中指定 bean 在完成初始化后应该执行的方法:
+ * 在 XML 中指定 bean 在实例化并完成配置(调用 setter)后应该执行的方法:
  * 可以在 beans 结点上指定 default-init-method = "init",
- * 也可以在 bean 结点上指定 init-method="init"
+ * 也可以在单个 bean 结点上指定 init-method="init"
  * spring 默认在启动 context 时初始化 bean, default-lazy-init 为 true 时表示只有在 getBean 时才创建.
  * 见 app.xml
  *
@@ -48,6 +48,7 @@ public class Person {
             System.out.println(e.getMessage());
         }
 
+        // 由于 person2 没有注入name, 会在调用 init 时抛出异常.
         try {
             Person person2 = context.getBean("person2", Person.class);
             person2.info();
