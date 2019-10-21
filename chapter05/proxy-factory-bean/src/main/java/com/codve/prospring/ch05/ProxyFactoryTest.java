@@ -2,8 +2,6 @@ package com.codve.prospring.ch05;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.awt.geom.GeneralPath;
-
 public class ProxyFactoryTest {
     public static void main(String[] args) {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext();
