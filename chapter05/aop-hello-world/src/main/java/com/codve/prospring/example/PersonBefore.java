@@ -21,11 +21,9 @@ public class PersonBefore implements MethodBeforeAdvice {
     }
 
     public static void main(String[] args) {
-        Person person = new Person();
-
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvice(new PersonBefore());
-        factory.setTarget(person);
+        factory.setTarget(new Person());
 
         Person proxy = (Person) factory.getProxy();
         proxy.work();

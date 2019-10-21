@@ -6,7 +6,7 @@ import org.springframework.aop.framework.ProxyFactory;
 import java.lang.reflect.Method;
 
 /**
- * 在用户操作数据库前插入前置通知
+ * 创建前置通知
  */
 public class DBAdvice implements MethodBeforeAdvice {
 

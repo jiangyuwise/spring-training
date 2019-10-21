@@ -8,7 +8,7 @@ import org.springframework.aop.framework.ProxyFactory;
  * 理解 AOP, 创建环绕通知
  * 环绕通知可以修改连接点传入的参数和返回的结果
  * 在 Person.work() 前后插入代码
- * PersonInterceptor implements MethodInterceptor extends Person
+ * invoke 返回的对象 implements extends Person
  */
 public class PersonInterceptor implements MethodInterceptor {
     @Override
@@ -23,11 +23,9 @@ public class PersonInterceptor implements MethodInterceptor {
     }
 
     public static void main(String[] args) {
-        Person person = new Person();
-
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvice(new PersonInterceptor());
-        factory.setTarget(person);
+        factory.setTarget(new Person());
 
         Person proxy = (Person) factory.getProxy();
         proxy.work();

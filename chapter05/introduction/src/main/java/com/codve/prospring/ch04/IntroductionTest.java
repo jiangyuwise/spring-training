@@ -5,9 +5,8 @@ import org.springframework.aop.framework.ProxyFactory;
 
 public class IntroductionTest {
     public static void main(String[] args) {
-//        Person person = new Person("Jimmy", 24);
         Person person = new Person();
-        person.setName("Jimmy");
+//        person.setName("Jimmy");
 
         IntroductionAdvisor advisor = new IsModifiedAdvisor();
         ProxyFactory factory = new ProxyFactory();

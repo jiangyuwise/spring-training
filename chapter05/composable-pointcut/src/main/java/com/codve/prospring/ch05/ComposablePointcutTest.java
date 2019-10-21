@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  */
 public class ComposablePointcutTest {
 
-    public Person getProxy(ComposablePointcut pointcut, Person person) {
+    public static Person getProxy(ComposablePointcut pointcut, Person person) {
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, new PersonBeforeAdvice());
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
@@ -40,13 +40,11 @@ public class ComposablePointcutTest {
         }
     }
 
-
     public static void main(String[] args) {
-        ComposablePointcutTest test = new ComposablePointcutTest();
         Person person = new Employee();
         ComposablePointcut pointcut = new ComposablePointcut(ClassFilter.TRUE,
                 new workMethodMatcher());
-        Person proxy = test.getProxy(pointcut, person);
+        Person proxy = getProxy(pointcut, person);
 
         proxy.work();
         proxy.rest(); // 切入点无效
@@ -54,14 +52,14 @@ public class ComposablePointcutTest {
 
         // 两个方法的并集, 切入点都有效
         pointcut.union(new restMethodMatcher());
-        proxy = test.getProxy(pointcut, person);
+        proxy = getProxy(pointcut, person);
         proxy.work();
         proxy.rest();
         System.out.println();
 
         // 再与 rest 方法求交集, 只剩下 rest 方法.
         pointcut.intersection(new restMethodMatcher());
-        proxy = test.getProxy(pointcut, person);
+        proxy = getProxy(pointcut, person);
         proxy.work(); // 切入点无效
         proxy.rest();
         System.out.println();

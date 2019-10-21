@@ -11,15 +11,13 @@ import org.springframework.aop.support.JdkRegexpMethodPointcut;
  */
 public class PersonRegPointcut {
     public static void main(String[] args) {
-        Employee employee = new Employee();
-
         JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
         pointcut.setPattern(".*wo.*");
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, new PersonAdvice());
 
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
-        factory.setTarget(employee);
+        factory.setTarget(new Employee());
 
         Person proxy = (Person) factory.getProxy();
 

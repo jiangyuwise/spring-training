@@ -12,15 +12,13 @@ import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
  */
 public class PersonAnnotationPointcut {
     public static void main(String[] args) {
-        Employee employee = new Employee();
-
         AnnotationMatchingPointcut pointcut = AnnotationMatchingPointcut
                 .forMethodAnnotation(AdviceAnnotation.class);
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, new PersonAdvice());
 
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
-        factory.setTarget(employee);
+        factory.setTarget(new Employee());
 
         Employee proxy = (Employee) factory.getProxy();
 

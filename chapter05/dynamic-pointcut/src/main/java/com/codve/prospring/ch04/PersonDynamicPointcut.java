@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 
 /**
  * 创建动态切入点
+ * 动态切入点比静态切入点多一个匹配参数的步骤
  */
 public class PersonDynamicPointcut extends DynamicMethodMatcherPointcut {
 
@@ -34,15 +35,13 @@ public class PersonDynamicPointcut extends DynamicMethodMatcherPointcut {
     }
 
     public static void main(String[] args) {
-        Employee employee = new Employee();
-
         Pointcut pointcut = new PersonDynamicPointcut();
         Advice advice = new PersonAdvice();
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
 
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
-        factory.setTarget(employee);
+        factory.setTarget(new Employee());
 
         Person proxy = (Person) factory.getProxy();
 

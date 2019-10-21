@@ -9,8 +9,9 @@ import java.util.Map;
 
 /**
  * 引入可以扩展现有的方法, 也可以动态扩展接口和类
- * 引入和切入点不可以同时使用
- * 使用引入检测属性是否发生修改
+ * 引入可以视为环绕切片, 仅适用于类级别. 不可以与切入点同时使用
+ * 标准 advisor 是一个实例对于多个对象; introduction advisor 是每个对象一个实例
+ * 使用引入添加一个新功能: 检测属性是否发生修改
  */
 public class PersonInterceptor extends DelegatingIntroductionInterceptor
         implements IsModified {
@@ -28,41 +29,33 @@ public class PersonInterceptor extends DelegatingIntroductionInterceptor
         if ((invocation.getMethod().getName().startsWith("set"))
                 && (invocation.getArguments().length == 1)) {
             Method getter = getGetter(invocation.getMethod());
-            if (getter != null) {
-                Object[] arguments = invocation.getArguments();
-                Object newValue = arguments[0];
-                Object oldValue = getter.invoke(invocation.getThis(), null);
-                if (newValue == null && oldValue == null) {
-                    isModified = false;
-                } else if (newValue == null && oldValue != null) {
-                    isModified = true;
-                } else if (newValue != null && oldValue == null) {
-                    isModified = true;
-                } else {
-                    isModified = !newValue.equals(oldValue);
-                }
+            Object[] arguments = invocation.getArguments();
+            Object newValue = arguments[0];
+            Object oldValue = getter.invoke(invocation.getThis());
+            if (newValue == null && oldValue == null) {
+                isModified = false;
+            } else if (newValue == null && oldValue != null) {
+                isModified = true;
+            } else if (newValue != null && oldValue == null) {
+                isModified = true;
+            } else {
+                isModified = !newValue.equals(oldValue);
             }
         }
-
-
         return super.invoke(invocation);
     }
 
     // 获取 getter
-    private Method getGetter(Method setter){
+    private Method getGetter(Method setter) throws NoSuchMethodException {
         Method getter = methodMap.get(setter);
         if (getter != null) {
             return getter;
         }
         String getterName = setter.getName().replaceFirst("set", "get");
-        try {
-            getter = setter.getDeclaringClass().getMethod(getterName, null);
-            synchronized (methodMap) {
-                methodMap.put(setter, getter);
-            }
-            return getter;
-        } catch (NoSuchMethodException e) {
-            return null;
+        getter = setter.getDeclaringClass().getMethod(getterName, null);
+        synchronized (methodMap) {
+            methodMap.put(setter, getter);
         }
+        return getter;
     }
 }

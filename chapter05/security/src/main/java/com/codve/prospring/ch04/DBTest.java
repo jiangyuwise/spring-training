@@ -4,12 +4,9 @@ import org.springframework.aop.framework.ProxyFactory;
 
 public class DBTest {
     public static DB getDB() {
-        DB db = new DB();
-        DBAdvice person = new DBAdvice();
-
         ProxyFactory factory = new ProxyFactory();
-        factory.addAdvice(person);
-        factory.setTarget(db);
+        factory.addAdvice(new DBAdvice());
+        factory.setTarget(new DB());
 
         return (DB) factory.getProxy();
     }

@@ -9,7 +9,8 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 /**
  *各种代理的性能测试
- * JDK 只能为接口生成代理, CGLIB 可以代理接口和类
+ * JDK 只能为接口生成代理, CGLIB 可以代理接口和类.
+ * JDK 会调用所有方法, 包括没有切片的方法.
  * CGLIB 以字节码的形式生成生成代理的子类
  * CGLIB 和 JDK 性能差不多, 但 CGLIB 固定链性能较好
  **/
@@ -30,7 +31,7 @@ public class ProxyPerform {
     // 测试 CGLIB 固定通知链
     public void cglibFrozen(Advisor advisor, Person person) {
         ProxyFactory factory = new ProxyFactory();
-        factory.setProxyTargetClass(true); // todo
+        factory.setProxyTargetClass(true);
         factory.addAdvisor(advisor);
         factory.setTarget(person);
         factory.setFrozen(true); // 固定通知链
@@ -55,66 +56,67 @@ public class ProxyPerform {
         long start = 0;
         long end = 0;
         long cost = 0;
+        long nano2micro = 1000000; // 1 millisecond(ms, 毫秒) = 1 * 10^6 nanosecond(ns, 纳秒)
+        int times = 500000; // 测试 50w 次
         // 测试有切入点的方法
         System.out.println("test work() method:");
         start = System.nanoTime(); // 系统当前的纳秒
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < times; i++) {
             proxy.work();
         }
         end = System.nanoTime();
-        cost = (end - start) / 1000000;
+        cost = (end - start) / nano2micro;
         System.out.println("took " +  cost + " ms\n");
 
         // 测试没有切入点的方法
         System.out.println("test rest() method:");
         start = System.nanoTime();
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < times; i++) {
             proxy.rest();
         }
         end = System.nanoTime();
-        cost = (end - start) / 1000000;
+        cost = (end - start) / nano2micro;
         System.out.println("took " + cost + " ms\n");
 
         // 测试 equal
         System.out.println("test equals() method:");
         start = System.nanoTime();
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < times; i++) {
             proxy.rest();
         }
         end = System.nanoTime();
-        cost = (end - start) / 1000000;
+        cost = (end - start) / nano2micro;
         System.out.println("took " + cost + " ms\n");
 
         // 测试 hashCode
         System.out.println("test hashCode() method:");
         start = System.nanoTime();
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < times; i++) {
             proxy.hashCode();
         }
         end = System.nanoTime();
-        cost = (end - start) / 1000000;
+        cost = (end - start) / nano2micro;
         System.out.println("took " + cost + " ms\n");
 
         // 测试 Advised 接口上的方法
         Advised advised = (Advised) proxy;
         System.out.println("test Advised.getProxyTargetClass() method:");
         start = System.nanoTime();
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < times; i++) {
             advised.getTargetClass();
         }
         end = System.nanoTime();
-        cost = (end - start) / 1000000;
+        cost = (end - start) / nano2micro;
         System.out.println("took " + cost + " ms\n\n");
     }
 
     public static void main(String[] args) {
-        ProxyPerform perform = new ProxyPerform();
-
-        Person person = new Employee();
         Pointcut pointcut = new PersonStaticPointcut();
         Advice advice = new PersonBeforeAdvice();
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
+        Person person = new Employee();
 
+        ProxyPerform perform = new ProxyPerform();
         perform.cglib(advisor, person);
         perform.cglibFrozen(advisor, person);
         perform.jdk(advisor, person);

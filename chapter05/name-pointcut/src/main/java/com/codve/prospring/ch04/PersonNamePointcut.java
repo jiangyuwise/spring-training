@@ -12,8 +12,6 @@ import org.springframework.aop.support.NameMatchMethodPointcutAdvisor;
  */
 public class PersonNamePointcut {
     public static void main(String[] args) {
-        Employee employee = new Employee();
-
         NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
         pointcut.addMethodName("work");
 
@@ -22,7 +20,7 @@ public class PersonNamePointcut {
 //        Advisor advisor = new NameMatchMethodPointcutAdvisor(new PersonAdvice());
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
-        factory.setTarget(employee);
+        factory.setTarget(new Employee());
 
         Person proxy = (Person) factory.getProxy();
 

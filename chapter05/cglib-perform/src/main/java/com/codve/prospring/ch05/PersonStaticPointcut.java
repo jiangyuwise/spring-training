@@ -10,6 +10,6 @@ import java.lang.reflect.Method;
 public class PersonStaticPointcut extends StaticMethodMatcherPointcut {
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
-        return "work".equals(method.getName());
+        return method.getName().equals("work");
     }
 }
