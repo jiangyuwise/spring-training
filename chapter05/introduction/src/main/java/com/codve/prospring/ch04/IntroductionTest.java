@@ -18,12 +18,12 @@ public class IntroductionTest {
         Person proxy = (Person) factory.getProxy();
         IsModified proxyInterface = (IsModified) proxy;
 
-        System.out.println(proxyInterface.isModified()); // 字段被修改, 返回 true
+        System.out.println(proxyInterface.isModified()); // false
 
         proxy.setName("James");
-        System.out.println(proxyInterface.isModified()); // 字段未被修改, 返回 false
+        System.out.println(proxyInterface.isModified()); // true
 
         proxy.setName("James");
-        System.out.println(proxyInterface.isModified()); // 字段被修改, 返回 false
+        System.out.println(proxyInterface.isModified()); // false
     }
 }

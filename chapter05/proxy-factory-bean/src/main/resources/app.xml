@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="person" class="com.codve.prospring.ch05.Person"/>
+    <bean id="advice" class="com.codve.prospring.ch05.PersonBeforeAdvice"/>
+
+    <!--employee1 的 person 属性是代理后的对象-->
+    <bean id="employee1" class="com.codve.prospring.ch05.Employee" p:person-ref="proxy1"/>
+
+    <!-- 创建代理, 设置前置切入点 -->
+    <bean id="proxy1" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:target-ref="person" p:interceptorNames-ref="interceptorAdviceNames"/>
+
+    <util:list id="interceptorAdviceNames">
+        <value>advice</value>
+    </util:list>
+
+
+    <bean id="employee2" class="com.codve.prospring.ch05.Employee" p:person-ref="proxy2"/>
+
+    <bean id="proxy2" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:target-ref="person" p:interceptorNames-ref="interceptorAdvisorNames"/>
+
+    <!-- 指定切入点 -->
+    <bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
+          p:advice-ref="advice">
+        <property name="pointcut">
+            <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut"
+                  p:expression="execution(* work*(..))"/>
+        </property>
+    </bean>
+    <util:list id="interceptorAdvisorNames">
+        <value>advisor</value>
+    </util:list>
+</beans>
