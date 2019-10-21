@@ -10,6 +10,6 @@ public class ProfileTest {
 
         Person person = context.getBean("person", Person.class);
         person.info();
-
+        context.close();
     }
 }
