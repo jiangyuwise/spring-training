@@ -1,7 +1,9 @@
 package com.codve.prospring.ch04;
 
+import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.ClassFilter;
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.DynamicMethodMatcherPointcut;
@@ -25,7 +27,6 @@ public class PersonDynamicPointcut extends DynamicMethodMatcherPointcut {
         return "work".equals(method.getName());
     }
 
-
     // 匹配类名称
     @Override
     public ClassFilter getClassFilter() {
@@ -35,10 +36,9 @@ public class PersonDynamicPointcut extends DynamicMethodMatcherPointcut {
     public static void main(String[] args) {
         Employee employee = new Employee();
 
-        Advisor advisor = new DefaultPointcutAdvisor(
-                new PersonDynamicPointcut(),
-                new PersonAdvice()
-        );
+        Pointcut pointcut = new PersonDynamicPointcut();
+        Advice advice = new PersonAdvice();
+        Advisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
 
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor);
@@ -46,10 +46,10 @@ public class PersonDynamicPointcut extends DynamicMethodMatcherPointcut {
 
         Person proxy = (Person) factory.getProxy();
 
-        // 参数小于 3, 通知不生效
+        // 参数小于 3, 无效切入点
         proxy.work(2);
 
-        // 参数大于 3, 通知生效
+        // 参数大于 3, 有效切入点
         proxy.work(8);
 
     }

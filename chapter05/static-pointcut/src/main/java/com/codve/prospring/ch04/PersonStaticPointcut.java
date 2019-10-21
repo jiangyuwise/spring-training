@@ -11,7 +11,11 @@ import org.springframework.aop.support.StaticMethodMatcherPointcut;
 import java.lang.reflect.Method;
 
 /**
+ * 配合使用切入点, 顾问, 通知
  * 创建静态切入点, 只有匹配成功的切入点才会生效
+ * 静态切入点和动态切入点的差别在 MethodMatcher.isRuntime(), 返回 true 表示动态
+ * 对于静态切入点, Spring 会对每一个方法调用MethodMatcher.matches(Method, Class<T>), 并缓存结果
+ * 静态切入点性能较好
  */
 public class PersonStaticPointcut extends StaticMethodMatcherPointcut {
 
@@ -37,7 +41,7 @@ public class PersonStaticPointcut extends StaticMethodMatcherPointcut {
         Advisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
 
         /**
-         * Employee 的环绕通知有效
+         * Employee 的切入点有效
          */
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvisor(advisor); // 注意不是 addAdvice
@@ -47,7 +51,7 @@ public class PersonStaticPointcut extends StaticMethodMatcherPointcut {
 
 
         /**
-         * Student 的环绕通知无效
+         * Student 的切入点无效
          */
         factory = new ProxyFactory();
         factory.addAdvisor(advisor);
