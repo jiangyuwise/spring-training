@@ -16,18 +16,16 @@ import org.springframework.context.annotation.Lazy;
  * XML 或者 @Bean 中指定的 destroy-method
  *
  */
-public class WriterConfigDemo {
+@Configuration
+public class WriterConfig {
 
-    @Configuration
-    static class WriterConfig {
-        @Lazy
-        @Bean(initMethod = "afterPropertiesSet", destroyMethod = "destroy")
-        Writer writer() {
-            Writer writer = new Writer();
-            writer.setFilepath(System.getProperty("java.io.tmpdir") +
-                    System.getProperty("file.separator") + "text.txt");
-            return writer;
-        }
+    @Lazy
+    @Bean(initMethod = "afterPropertiesSet", destroyMethod = "destroy")
+    Writer writer() {
+        Writer writer = new Writer();
+        writer.setFilepath(System.getProperty("java.io.tmpdir") +
+                System.getProperty("file.separator") + "text.txt");
+        return writer;
     }
 
     public static void main(String[] args) {

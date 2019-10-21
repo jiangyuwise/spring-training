@@ -17,28 +17,26 @@ import org.springframework.context.annotation.Lazy;
  * 2. InitializingBean 接口的 afterProperties()
  * 3. xml 的 init-method 或者 @Bean(initMethod)
  */
-public class PersonConfigDemo {
-    @Configuration
-    static class PersonConfig {
+@Configuration
+public class PersonConfig {
 
-        // 定义 id="person1" 的 bean
-        @Lazy
-        @Bean(initMethod = "init")
-        Person person1() {
-            Person person1 = new Person();
-            person1.setName("Jimmy");
-            person1.setAge(22);
-            return person1;
-        }
+    // 定义 id="person1" 的 bean
+    @Lazy
+    @Bean(initMethod = "init")
+    Person person1() {
+        Person person1 = new Person();
+        person1.setName("Jimmy");
+        person1.setAge(22);
+        return person1;
+    }
 
-        // 定义 id="person2" 的 bean
-        @Lazy
-        @Bean(initMethod = "init")
-        Person person2() {
-            Person person2 = new Person();
-            person2.setAge(24);
-            return person2;
-        }
+    // 定义 id="person2" 的 bean
+    @Lazy
+    @Bean(initMethod = "init")
+    Person person2() {
+        Person person2 = new Person();
+        person2.setAge(24);
+        return person2;
     }
 
     public static void main(String[] args) {
