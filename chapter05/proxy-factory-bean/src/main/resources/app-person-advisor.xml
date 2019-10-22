@@ -4,25 +4,11 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="person" class="com.codve.prospring.ch05.Person"/>
-    <bean id="advice" class="com.codve.prospring.ch05.PersonBeforeAdvice"/>
+    <bean id="person" class="com.codve.prospring.ch05.Person"/> <!--target-->
 
-    <!--代理注入-->
-    <bean id="employee1" class="com.codve.prospring.ch05.Employee" p:person-ref="proxy1"/>
+    <bean id="advice" class="com.codve.prospring.ch05.PersonBeforeAdvice"/><!-- advice -->
 
-    <bean id="proxy1" class="org.springframework.aop.framework.ProxyFactoryBean"
-          p:target-ref="person" p:interceptorNames-ref="interceptorAdviceNames"/>
-
-    <util:list id="interceptorAdviceNames">
-        <value>advice</value>
-    </util:list>
-
-
-    <bean id="employee2" class="com.codve.prospring.ch05.Employee" p:person-ref="proxy2"/>
-
-    <bean id="proxy2" class="org.springframework.aop.framework.ProxyFactoryBean"
-          p:target-ref="person" p:interceptorNames-ref="interceptorAdvisorNames"/>
-
+    <!--advisor-->
     <bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
           p:advice-ref="advice">
         <property name="pointcut">
@@ -31,7 +17,11 @@
         </property>
     </bean>
 
-    <util:list id="interceptorAdvisorNames">
+    <!--proxy factory-->
+    <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:target-ref="person" p:interceptorNames-ref="advisors"/>
+
+    <util:list id="advisors">
         <value>advisor</value>
     </util:list>
 </beans>

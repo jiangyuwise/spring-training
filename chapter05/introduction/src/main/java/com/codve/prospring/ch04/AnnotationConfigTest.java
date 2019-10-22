@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 
 /**
- * 使用注解代替 xml
+ * 使用注解代替 xml 创建 introduction
  */
 public class AnnotationConfigTest {
     @Bean
@@ -27,6 +27,7 @@ public class AnnotationConfigTest {
         proxyFactoryBean.addAdvisor(advisor());
         proxyFactoryBean.setTarget(person());
         proxyFactoryBean.setProxyTargetClass(true);
+        proxyFactoryBean.setOptimize(true);
         return proxyFactoryBean;
     }
 

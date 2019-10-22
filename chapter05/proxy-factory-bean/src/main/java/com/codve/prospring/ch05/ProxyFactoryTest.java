@@ -2,6 +2,10 @@ package com.codve.prospring.ch05;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+/**
+ * 在 app.xml 中创建 target, advice, pointcut, advisor, proxy
+ * 并用 proxy 替换target, 完成代理注入
+ */
 public class ProxyFactoryTest {
     public static void main(String[] args) {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext();

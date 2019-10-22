@@ -1,6 +1,7 @@
 package com.codve.prospring.ch05;
 
-public class Employee  {
+// 使用委托的适配器
+public class Employee {
     private Person person;
 
     public void setPerson(Person person) {

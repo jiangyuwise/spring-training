@@ -4,16 +4,14 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="person" class="com.codve.prospring.ch04.Person" p:name="Jimmy"/>
-    <bean id="advisor" class="com.codve.prospring.ch04.IsModifiedAdvisor"/>
+    <bean id="person" class="com.codve.prospring.ch05.Person"/> <!--target-->
+    <bean id="advice" class="com.codve.prospring.ch05.PersonBeforeAdvice"/> <!--advice-->
 
-    <util:list id="advisors">
-        <value>advisor</value>
-    </util:list>
-
+    <!--proxy factory-->
     <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"
-          p:target-ref="person"
-          p:interceptorNames-ref="advisors"
-          p:proxyTargetClass="true"
-          p:optimize="true"/>
+          p:target-ref="person" p:interceptorNames-ref="advices"/>
+
+    <util:list id="advices">
+        <value>advice</value>
+    </util:list>
 </beans>

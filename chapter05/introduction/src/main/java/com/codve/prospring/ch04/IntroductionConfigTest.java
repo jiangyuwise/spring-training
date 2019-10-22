@@ -3,7 +3,7 @@ package com.codve.prospring.ch04;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
- * 使用 XML 配置
+ * 使用 XML 文件创建 introduction
  */
 public class IntroductionConfigTest {
     public static void main(String[] args) {
