@@ -1,6 +1,5 @@
 package com.codve.prospring.ch05;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**

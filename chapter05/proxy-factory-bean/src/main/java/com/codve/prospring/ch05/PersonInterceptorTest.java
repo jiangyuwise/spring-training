@@ -3,13 +3,13 @@ package com.codve.prospring.ch05;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
- * 在 app-aop-interceptor.xml 中 创建自定义的前置通知和环绕通知
+ * 在 person-interceptor.xml 中 创建自定义的前置通知和环绕通知
  * @see PersonInterceptor
  */
-public class AopInterceptor {
+public class PersonInterceptorTest {
     public static void main(String[] args) {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext();
-        context.load("classpath:app-aop-interceptor.xml");
+        context.load("classpath:person-interceptor.xml");
         context.refresh();
 
         Person person = context.getBean("person", Person.class);
