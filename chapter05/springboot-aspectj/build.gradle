@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/libs-snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/libs-milestone" }
+        maven { url "https://maven.eveoh.nl/content/repositories/releases" }
+    }
+
+    dependencies {
+        classpath "nl.eveoh:gradle-aspectj:2.0"
+    }
+}
+
+dependencies {
+    compile boot.starterAop
+}
+
+repositories {
+    mavenCentral()
+}
+
+project.ext {
+    aspectjVersion = '1.9.3'
+}
+
+apply plugin: 'aspectj.gradle'
+
+jar {
+    manifest {
+        attributes(
+                "Created-By": "Jimmy",
+                "Specification-Title": "Pro Spring 5",
+                "Main-Class": "com.codve.prospring.ch05.Test",
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+    }
+}

@@ -21,6 +21,7 @@ ext {
             starter         : "org.springframework.boot:spring-boot-starter:$bootVersion",
             starterWeb      : "org.springframework.boot:spring-boot-starter-web:$bootVersion",
             actuator        : "org.springframework.boot:spring-boot-starter-actuator:$bootVersion",
+            starterAop      : "org.springframework.boot:spring-boot-starter-aop:$bootVersion",
     ]
 
     misc = [

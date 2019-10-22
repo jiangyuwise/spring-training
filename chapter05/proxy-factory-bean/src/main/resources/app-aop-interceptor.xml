@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="person" class="com.codve.prospring.ch05.Person"/>
+    <bean id="advice" class="com.codve.prospring.ch05.PersonInterceptor"/>
+
+    <aop:config>
+        <aop:pointcut id="pointcut1"
+                expression="execution(* com.codve.prospring.ch05.Person.work*(int)) and args(hour)"/>
+        <aop:pointcut id="pointcut2"
+                      expression="execution(* com.codve.prospring.ch05.Person.work*())"/>
+
+        <aop:aspect ref="advice">
+            <aop:before method="before" pointcut-ref="pointcut1"/>
+            <aop:around method="around" pointcut-ref="pointcut2"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="employee" class="com.codve.prospring.ch05.Employee" p:person-ref="person"/>
+</beans>

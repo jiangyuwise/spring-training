@@ -52,7 +52,7 @@ public class PersonInterceptor extends DelegatingIntroductionInterceptor
             return getter;
         }
         String getterName = setter.getName().replaceFirst("set", "get");
-        getter = setter.getDeclaringClass().getMethod(getterName, null);
+        getter = setter.getDeclaringClass().getMethod(getterName);
         synchronized (methodMap) {
             methodMap.put(setter, getter);
         }
