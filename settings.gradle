@@ -44,3 +44,5 @@ include 'chapter05:proxy-factory-bean'
 include 'chapter05:aspectj-annotation'
 include 'chapter05:springboot-aop'
 //include 'chapter05:springboot-aspectj'
+
+include 'chapter06:plain-jdbc'

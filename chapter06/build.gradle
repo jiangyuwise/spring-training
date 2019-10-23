@@ -1,0 +1,17 @@
+subprojects {
+    group 'com.codve.prospring.ch06'
+    apply plugin: 'java'
+
+    /*Task that copies all the dependencies under build/libs */
+    task copyDependencies(type: Copy) {
+        from configurations.compile
+        into 'build/libs'
+    }
+
+    dependencies {
+        if (!project.name.contains("boot")) {
+            compile spring.context, spring.jdbc, db.dbcp2, misc.lang3, misc.slf4jJcl, misc.logback
+        }
+        testCompile testing.junit
+    }
+}

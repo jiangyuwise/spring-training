@@ -7,9 +7,9 @@ public class CoGarage implements Garage {
 
     @Override
     public Car getCar(String key) {
-        if (key.equals("bmw")) {
+        if ("bmw".equals(key)) {
             return new BMW();
-        } else if (key.equals("audi")) {
+        } else if ("audi".equals(key)) {
             return new Audi();
         }
         else {

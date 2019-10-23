@@ -1,0 +1,12 @@
+dependencies {
+    compile db.mysql
+}
+
+jar {
+    manifest {
+        attributes("Created-By"      : "Jimmy",
+                "Specification-Title": "Pro Spring",
+                "Main-Class"         : "",
+                "Class-Path"         : configurations.compile.collect { it.getName() }.join(' '))
+    }
+}
