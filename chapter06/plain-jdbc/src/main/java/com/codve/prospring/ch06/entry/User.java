@@ -1,6 +1,8 @@
 package com.codve.prospring.ch06.entry;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,10 +16,6 @@ public class User implements Serializable {
     private String name;
     private Date birthday;
     private List<Article> articles;
-
-    public User() {
-        articles = new ArrayList<>();
-    }
 
     public boolean addArticle(Article article) {
         if (articles.contains(article)) {
@@ -61,10 +59,12 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
+        String birthdayStr = String.format("%tF %<tT", birthday);
+
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", birthday=" + birthday +
+                ", birthday=" + birthdayStr +
                 '}';
     }
 }

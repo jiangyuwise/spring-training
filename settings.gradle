@@ -46,3 +46,4 @@ include 'chapter05:springboot-aop'
 //include 'chapter05:springboot-aspectj'
 
 include 'chapter06:plain-jdbc'
+include 'chapter06:spring-jdbc-annotation'

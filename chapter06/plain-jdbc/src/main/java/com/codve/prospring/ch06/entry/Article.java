@@ -47,11 +47,12 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
+        String createTimeStr = String.format("%tF %<tT", createTime);
         return "Article{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", title='" + title + '\'' +
-                ", createTime=" + createTime +
+                ", createTime=" + createTimeStr +
                 '}';
     }
 }
