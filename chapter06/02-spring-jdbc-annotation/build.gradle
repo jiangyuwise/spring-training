@@ -1,0 +1,12 @@
+dependencies {
+    compile project(':chapter06:01-plain-jdbc')
+    compile db.mysql, db.dbcp2
+}
+
+jar {
+    manifest {
+        attributes("Created-By": "Jimmy",
+                "Specification-Title": "Pro Spring",
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+    }
+}
