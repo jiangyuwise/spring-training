@@ -15,6 +15,8 @@ ext {
     // db
     dbcpVersion = '2.1'
     mysqlVersion = '8.0.13'
+    h2Version = '1.4.194'
+    derbyVersion = '10.13.1.1'
 
     spring = [
             context: "org.springframework:spring-context:$springVersion",
@@ -44,6 +46,8 @@ ext {
     db = [
             dbcp2 : "org.apache.commons:commons-dbcp2:$dbcpVersion",
             mysql : "mysql:mysql-connector-java:$mysqlVersion",
+            h2    : "com.h2database:h2:$h2Version",
+            derby : "org.apache.derby:derby:$derbyVersion",
     ]
 }
 

@@ -14,6 +14,8 @@ import java.util.*;
 
 /**
  * 实现 UserDao 接口, 实际上是使用委托的适配器模式
+ * 与接口相比, 引入了 DataSource实例
+ *
  * 使用 @Resource 注入 dataSource.
  * @author admin
  * @date 2019/10/24 17:27

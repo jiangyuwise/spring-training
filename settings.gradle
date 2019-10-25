@@ -47,3 +47,4 @@ include 'chapter05:springboot-aop'
 
 include 'chapter06:plain-jdbc'
 include 'chapter06:spring-jdbc-annotation'
+include 'chapter06:spring-jdbc-embed'
