@@ -78,7 +78,7 @@ public class JdbcUserDaoTest {
         for (User user : users) {
             System.out.println(user);
             List<Article> articles = user.getArticles();
-            if (articles.size() > 0) {
+            if (articles != null && articles.size() > 0) {
                 for (Article article : articles) {
                     System.out.println("\t" + article.toString());
                 }

@@ -1,4 +1,4 @@
-package com.codve.prospring.ch06.config;
+package com.codve.prospring.ch06;
 
 import com.codve.prospring.ch06.entry.Article;
 import com.codve.prospring.ch06.entry.User;

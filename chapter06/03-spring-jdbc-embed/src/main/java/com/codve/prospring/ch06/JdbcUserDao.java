@@ -1,6 +1,5 @@
 package com.codve.prospring.ch06;
 
-import com.codve.prospring.ch06.config.UserWithArticleExtractor;
 import com.codve.prospring.ch06.dao.UserDao;
 import com.codve.prospring.ch06.entry.User;
 import org.apache.commons.lang3.NotImplementedException;
@@ -47,22 +46,12 @@ public class JdbcUserDao implements UserDao, InitializingBean {
     /**
      * jdbcTemplate.queryForObject(sql, 要传递的参数, 返回的类型)
      * @param id 用户编号
-     * @return
+     * @return String
      */
     @Override
     public String getNameById(Long id) {
         String sql = "select `user_name` from `user` where `user_id` = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, String.class);
-    }
-
-    @Override
-    public List<User> listUsersByName(String name) {
-        throw new NotImplementedException("listUsers");
-    }
-
-    @Override
-    public void insert(User user) {
-        throw new NotImplementedException("listUsers");
     }
 
     @Override
@@ -77,11 +66,6 @@ public class JdbcUserDao implements UserDao, InitializingBean {
     }
 
     @Override
-    public void delete(Long id) {
-        throw new NotImplementedException("listUsers");
-    }
-
-    @Override
     public List<User> listUsersWithArticle() {
         String sql = "select `user`.`user_id`, `user`.`user_name`, `user`.`user_birthday`, " +
                 "`article`.`article_id`, `article`.`article_title`, `article`.`create_time` " +
@@ -90,8 +74,23 @@ public class JdbcUserDao implements UserDao, InitializingBean {
     }
 
     @Override
+    public List<User> listUsersByName(String name) {
+        return null;
+    }
+
+    @Override
+    public void insert(User user) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
     public void insertWithArticle(User user) {
-        throw new NotImplementedException("listUsers");
+
     }
 
     @Override
