@@ -32,11 +32,6 @@ public class DataSourceConfig {
     @Value("${jdbc.password}")
     private String password;
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer configurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
     @SuppressWarnings("unchecked")
     @Lazy
     @Bean

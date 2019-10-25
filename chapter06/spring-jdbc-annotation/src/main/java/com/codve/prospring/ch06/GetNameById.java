@@ -17,7 +17,7 @@ public class GetNameById extends SqlFunction {
 
     public GetNameById(DataSource dataSource) {
         super(dataSource, SQL);
-        super.declareParameter(new SqlParameter(Types.BIGINT));
+        declareParameter(new SqlParameter(Types.BIGINT));
         compile();
     }
 }

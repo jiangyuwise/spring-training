@@ -30,6 +30,7 @@ public class DataSourceTest {
 
     /**
      * 使用org.apache.commons.dbcp2.BasicDataSource
+     * BasicDataSource 提供连接池
      * dataSource 定义在 app.xml 中, app.xml 通过 util:properties
      * 加载了main/resources/db/jdbc2.properties.
      *
@@ -51,6 +52,7 @@ public class DataSourceTest {
 
     /**
      * 使用 org.springframework.jdbc.datasource.DriverManagerDataSource
+     * DriverManagerDataSource 没有连接池
      * dataSource 定义在 app2.xml 中, 通过context:property-placeholder
      * 加载了 main/resources/db/jdbc.properties
      * 直接使用 ${key} 获取 key
@@ -88,7 +90,7 @@ public class DataSourceTest {
     }
 
     /**
-     * 测试用声明代替 XML
+     * 测试用注解代替 XML
      * @see DataSourceConfig
      */
     @Test

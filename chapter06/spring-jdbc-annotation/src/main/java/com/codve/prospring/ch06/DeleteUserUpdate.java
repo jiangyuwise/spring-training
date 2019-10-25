@@ -10,12 +10,12 @@ import java.sql.Types;
  * @author admin
  * @date 2019/10/24 19:16
  */
-public class DeleteUser extends SqlUpdate {
-    private static final String SQL_DELETE_USER =
+public class DeleteUserUpdate extends SqlUpdate {
+    private static final String SQL =
             "delete from `user` where `user_id` = :id";
 
-    public DeleteUser(DataSource dataSource) {
-        super(dataSource, SQL_DELETE_USER);
+    public DeleteUserUpdate(DataSource dataSource) {
+        super(dataSource, SQL);
         super.declareParameter(new SqlParameter("id", Types.BIGINT));
     }
 }

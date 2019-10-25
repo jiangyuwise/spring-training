@@ -13,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class DataSourceConfigTest {
 
     // 测试查找所有用户
     @Test
-    public void listUsersTest() {
+    public void listUsers() {
         List<User> users = userDao.listUsers();
         assertEquals(3, users.size());
 
@@ -90,7 +91,7 @@ public class DataSourceConfigTest {
     // 删除用户
     @Test
     public void delete() {
-        userDao.delete(10L);
+        userDao.delete(12L);
         showUsers(userDao.listUsers());
     }
 
@@ -105,6 +106,32 @@ public class DataSourceConfigTest {
     // 左联查找用户和文章
     @Test
     public void listUsersWithArticle() {
+        showUsers(userDao.listUsersWithArticle());
+    }
+
+    // 批量插入
+    @Test
+    public void insertWithArticle() throws ParseException {
+        User user = new User();
+        user.setName("jiangyu");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse("1995-08-07");
+        user.setBirthday(date);
+
+        Article article1 = new Article();
+        article1.setTitle("Spring boot.");
+        article1.setCreateTime(format.parse("2019-10-1"));
+
+        Article article2 = new Article();
+        article2.setTitle("Spring cloud");
+        article2.setCreateTime((format.parse("2019-6-1")));
+
+        List<Article> articles = new ArrayList<>();
+        articles.add(article1);
+        articles.add(article2);
+        user.setArticles(articles);
+
+        userDao.insertWithArticle(user);
         showUsers(userDao.listUsersWithArticle());
     }
 

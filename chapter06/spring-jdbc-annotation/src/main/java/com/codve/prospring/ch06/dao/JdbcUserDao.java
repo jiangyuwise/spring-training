@@ -3,9 +3,6 @@ package com.codve.prospring.ch06.dao;
 import com.codve.prospring.ch06.*;
 import com.codve.prospring.ch06.entry.Article;
 import com.codve.prospring.ch06.entry.User;
-import org.apache.commons.lang3.NotImplementedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -13,8 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -26,25 +21,25 @@ import java.util.*;
 @Repository("userDao")
 public class JdbcUserDao implements UserDao{
 
-    private static Logger logger = LoggerFactory.getLogger(JdbcUserDao.class);
-
     private DataSource dataSource;
 
-    private ListUsers listUsers;
+    private ListUsersQuery listUsersQuery;
 
-    private ListUsersByName listUsersByName;
+    private ListUsersByNameQuery listUsersByNameQuery;
 
-    private InsertUser insertUser;
+    private InsertUserUpdate insertUserUpdate;
 
-    private UpdateUser updateUser;
+    private UpdateUserUpdate updateUserUpdate;
 
-    private DeleteUser deleteUser;
+    private DeleteUserUpdate deleteUserUpdate;
 
     private GetNameById getNameById;
 
+    private InsertArticleUpdate insertArticleUpdate;
+
     @Override
     public List<User> listUsers() {
-        return listUsers.execute();
+        return listUsersQuery.execute();
     }
 
     //TODO 有错
@@ -56,36 +51,36 @@ public class JdbcUserDao implements UserDao{
 
     @Override
     public List<User> listUsersByName(String name) {
-        Map<String, Object> paramMap = new HashMap<>(1);
-        paramMap.put("name", name);
-        return listUsersByName.executeByNamedParam(paramMap);
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("name", name);
+        return listUsersByNameQuery.executeByNamedParam(params);
     }
 
     @Override
     public void insert(User user) {
-        Map<String, Object> paramMap = new HashMap<>(2);
-        paramMap.put("name", user.getName());
-        paramMap.put("birthday", user.getBirthday().getTime());
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("name", user.getName());
+        params.put("birthday", user.getBirthday().getTime());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        insertUser.updateByNamedParam(paramMap, keyHolder);
+        insertUserUpdate.updateByNamedParam(params, keyHolder);
 
         user.setId(keyHolder.getKey().longValue());
     }
 
     @Override
     public void update(User user) {
-        Map<String, Object> paramMap = new HashMap<>(4);
-        paramMap.put("name", user.getName());
-        paramMap.put("birthday", user.getBirthday().getTime());
-        paramMap.put("id", user.getId());
-        updateUser.updateByNamedParam(paramMap);
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("name", user.getName());
+        params.put("birthday", user.getBirthday().getTime());
+        params.put("id", user.getId());
+        updateUserUpdate.updateByNamedParam(params);
     }
 
     @Override
     public void delete(Long id) {
         Map<String, Object> paramMap = new HashMap<>(2);
         paramMap.put("id", id);
-        deleteUser.updateByNamedParam(paramMap);
+        deleteUserUpdate.updateByNamedParam(paramMap);
     }
 
     @Override
@@ -125,17 +120,35 @@ public class JdbcUserDao implements UserDao{
 
     @Override
     public void insertWithArticle(User user) {
+        insertArticleUpdate = new InsertArticleUpdate(dataSource);
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("name", user.getName());
+        params.put("birthday", user.getBirthday().getTime());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        insertUserUpdate.updateByNamedParam(params, keyHolder);
+        user.setId(keyHolder.getKey().longValue());
 
+        List<Article> articles = user.getArticles();
+        if (articles != null && articles.size() > 0) {
+            for (Article article : articles) {
+                params = new HashMap<>(16);
+                params.put("userId", user.getId());
+                params.put("title", article.getTitle());
+                params.put("createTime", article.getCreateTime().getTime());
+                insertArticleUpdate.updateByNamedParam(params);
+            }
+        }
+        insertArticleUpdate.flush();
     }
 
     @Resource(name = "dataSource")
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.listUsers = new ListUsers(dataSource);
-        this.listUsersByName = new ListUsersByName(dataSource);
-        this.insertUser = new InsertUser(dataSource);
-        this.updateUser = new UpdateUser(dataSource);
-        this.deleteUser = new DeleteUser(dataSource);
+        this.listUsersQuery = new ListUsersQuery(dataSource);
+        this.listUsersByNameQuery = new ListUsersByNameQuery(dataSource);
+        this.insertUserUpdate = new InsertUserUpdate(dataSource);
+        this.updateUserUpdate = new UpdateUserUpdate(dataSource);
+        this.deleteUserUpdate = new DeleteUserUpdate(dataSource);
         this.getNameById = new GetNameById(dataSource);
 
     }
